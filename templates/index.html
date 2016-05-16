@@ -30,11 +30,11 @@
             {
                 var req = new XMLHttpRequest()
                         
-                req.open('POST', '/ajax')
+                req.open('POST', '/md5')
                 req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
                 var un = document.getElementById('key_string').value
                 var sec = document.getElementById('secret').value
-                var postVars = 'username='+un+'&secret='+sec
+                var postVars = 'key_string='+un+'&secret='+sec
                 req.send(postVars)
 
 
@@ -43,7 +43,7 @@
                     if (req.readyState == 4 && req.status == 200)
                     {                  
                         var response = JSON.parse(req.responseText)
-                        document.getElementById('myDiv').innerHTML = 'Hashed Value ::'+response.username;
+                        document.getElementById('myDiv').innerHTML = 'Hashed Value ::'+response.dm;
         		        
                     }
                 }
@@ -54,12 +54,14 @@
     </head>
     <body>
         <div id="form">
-            <form  onsubmit="handle()" method="POST" action=>
+            <form action="" method="POST" >
                 <fieldset>
                     <input type="text"   name="key_string" id="key_string" placeholder="Input text here">
                     <input type="hidden" name="secret"     id="secret" value="shhh">
-                    <input type="button" name="button"   value="Submit" onclick="return getMD5()">
+                    <input type="submit" name="button"   value="Submit" onclick="return getMD5()">
 
+                </fieldset>
+                <fieldset>
                     <div id="myDiv"></div>
                 </fieldset>
             </form>

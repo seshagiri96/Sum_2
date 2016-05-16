@@ -10,14 +10,15 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
         
-@app.route('/ajax', methods = ['POST'])
+@app.route('/md5', methods = ['POST'])
 def ajax_request():
-    username = request.form['username'] 
-    m = md5.new()
-    m.update(username) 
-    tmp = m.hexdigest()
+    key_string = request.form['key_string'] 
+    digest_message = md5.new()
+    digest_message.update(key_string)
+    tmp = digest_message.hexdigest()
     print tmp
-    return jsonify(username=tmp)
+
+    return jsonify(dm=tmp)
     
 if __name__ == "__main__":
     app.run(debug = True)
