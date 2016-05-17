@@ -29,8 +29,8 @@
                         var response = JSON.parse(new_user_req.responseText);
                         //alert(response)
                         document.getElementById('response').innerHTML = response.response;
-                        if(response.code = 1){
-                        	//swindow.location.href='/register_success';
+                        if(response.code == 1){
+                        	window.location.href='/login.html';
                         }      
                     }
                 }
