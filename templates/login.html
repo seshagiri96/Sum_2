@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Page</title>
+	<script type="text/javascript">
+
+            function call_loginend(e)
+            {
+            	//alert('jds')
+            	//e.preventDefault()
+                var req = new XMLHttpRequest()
+                        
+                req.open('POST', '/login_end')
+                req.setRequestHeader("Content-type", "application/json")
+                var un = document.getElementById('username').value
+                var pwd = document.getElementById('password').value
+                var postVars = JSON.stringify({username:un,password:pwd})
+                req.send(postVars)
+
+        	   req.onreadystatechange = function()
+                {
+                    if (req.readyState == 4 && req.status == 200)
+                    {                  
+                        var response = JSON.parse(req.responseText)
+                        document.getElementById('response').innerHTML = response.response
+                        if(response.code ==1){
+                        	//window.location.href='/login_success';
+                        }
+                    }
+                }
+                
+                return false
+            }
+        </script>
+</head>
+<body>
+	<form action="" method="post">
+		Username :<input type="text"     id="username"     placeholder="Your username"><br>
+		Password :<input type="password" id="password" placeholder="********"><br>
+		<input type="hidden" name="secret" id="secret" value="shhh"> 
+		<input type="button" name="login" value="Login" onclick="call_loginend()">
+	</form>	
+	<div id="response"></div>
+</body>
+</html>

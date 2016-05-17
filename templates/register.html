@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Form</title>
+	<script type="text/javascript">
+
+            function call_registerend(e)
+            {
+            	//alert('got it')
+            	//e.preventDefault()
+                var new_user_req = new XMLHttpRequest()
+                        
+                new_user_req.open('POST', '/register_end')
+                new_user_req.setRequestHeader("Content-type", "application/json")
+                var fname = document.getElementById('firstname').value
+                var lname = document.getElementById('lastname').value
+                var uname = document.getElementById('username').value
+                var pass  = document.getElementById('password').value
+                var bio   = document.getElementById('biodata').value
+                var postVars = JSON.stringify({firstname:fname,lastname:lname,username:uname,password:pass,biodata:bio})
+                new_user_req.send(postVars)
+
+
+        	   new_user_req.onreadystatechange = function()
+                {
+                    if (new_user_req.readyState == 4 && new_user_req.status == 200)
+                    {                  
+                        var response = JSON.parse(new_user_req.responseText);
+                        //alert(response)
+                        document.getElementById('response').innerHTML = response.response;
+                        if(response.code = 1){
+                        	//swindow.location.href='/register_success';
+                        }      
+                    }
+                }
+                
+                return false
+            }
+            function test(e){
+            	alert('Yeathinking rght!');
+            	e.preventDefault();
+            	return false;
+            }
+        </script>
+</head>
+<body>
+	<form action="" method="post">
+		Firstname : <input type="text" 		id="firstname" placeholder="Eg :John" 		    ><br>
+		Lastname  : <input type="text" 		id="lastname"  placeholder="Eg: Doe" 		    ><br>
+		Username  : <input type="text" 		id="username"  placeholder="Eg: johnd" 	        ><br>
+		Password  : <input type="password" 	id="password"  placeholder="********" 	        ><br>
+		<input type="hidden" name="secret" id="secret" value="shhh"> 
+		Bio		  : <br><textarea rows="5" cols="50" placeholder="Eg: I am a engineer" id="biodata"></textarea><br>
+		<input type="button" name="submit" value="Submit" onclick="call_registerend()" />
+	</form>
+	<div>
+		<p id="response"></p>
+	</div>
+
+</body>
+</html>

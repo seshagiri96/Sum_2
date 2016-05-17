@@ -1,72 +1,10 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-    <head>
-
-        <title>MD5 Calculator</title>
-        <script type="text/javascript">
-
-            <!-- -->
-            function removeElement(element_id) {
-                element = document.getElementById(element_id)
-                element && element.parentNode && element.parentNode.removeChild(element);
-            }
-
-            <!-- -->
-            function check_for_enter(){
-                if(e.keyCode === 13)
-                    getMD5();
-                return false;
-            }
-
-            <!-- -->
-            function handle(e){
-                e.preventDefault();
-                getMD5();
-                return false;
-            }
-
-            <!-- -->
-            function getMD5()
-            {
-                var req = new XMLHttpRequest()
-                        
-                req.open('POST', '/md5')
-                req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-                var un = document.getElementById('key_string').value
-                var sec = document.getElementById('secret').value
-                var postVars = 'key_string='+un+'&secret='+sec
-                req.send(postVars)
-
-
-        	   req.onreadystatechange = function()
-                {
-                    if (req.readyState == 4 && req.status == 200)
-                    {                  
-                        var response = JSON.parse(req.responseText)
-                        document.getElementById('myDiv').innerHTML = 'Hashed Value ::'+response.dm;
-        		        
-                    }
-                }
-                
-                return false
-            }
-        </script>
-    </head>
-    <body>
-        <div id="form">
-            <form action="" method="POST" >
-                <fieldset>
-                    <input type="text"   name="key_string" id="key_string" placeholder="Input text here">
-                    <input type="hidden" name="secret"     id="secret" value="shhh">
-                    <input type="submit" name="button"   value="Submit" onclick="return getMD5()">
-
-                </fieldset>
-                <fieldset>
-                    <div id="myDiv"></div>
-                </fieldset>
-            </form>
-        </div>
-        
-        
-    </body>
+<head>
+	<title>Welcome!!</title>
+</head>
+<body>
+	New here: <a href="/register.html">Register</a><br>
+	Already a member : <a href="/login.html">Login</a>
+</body>
 </html>
